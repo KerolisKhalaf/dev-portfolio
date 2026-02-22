@@ -15,9 +15,14 @@ export class GithubService {
 
   getRepos(): Observable<ReposState> {
     return this.http
-      .get<GitHubRepo[]>(`https://api.github.com/users/${this.username}/repos?sort=updated`)
+      .get<GitHubRepo[]>(
+        `https://api.github.com/users/${this.username}/repos?sort=updated&per_page=12&type=all`
+      )
       .pipe(
-        map((data) => ({ loading: false, data })),
+        map((repos) => ({
+          loading: false,
+          data: repos.filter((r) => !r.fork),
+        })),
         startWith({ loading: true, data: [] as GitHubRepo[] }),
         catchError(() => of({ loading: false, data: [] as GitHubRepo[] }))
       );

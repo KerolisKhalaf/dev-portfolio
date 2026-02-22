@@ -4,74 +4,112 @@ import { Component } from '@angular/core';
   selector: 'app-footer',
   standalone: true,
   template: `
-    <footer class="footer-cta">
-      <h3>Let's Connect</h3>
-      <p>Open to opportunities in Software & DevOps</p>
-      <div class="cta-links">
-        <a href="https://www.linkedin.com/in/keroliskhalaf" target="_blank" rel="noopener" class="cta-btn" aria-label="LinkedIn">
-          <i class="devicon-linkedin-plain"></i>
-          LinkedIn
-        </a>
-        <a href="https://github.com/KerolisKhalaf" target="_blank" rel="noopener" class="cta-btn" aria-label="GitHub">
-          <i class="devicon-github-original"></i>
-          GitHub
-        </a>
-        <a href="https://www.credly.com/users/kerolis-khalaf" target="_blank" rel="noopener" class="cta-btn" aria-label="Credly">
-          <i class="credly-icon">◇</i>
-          Credly
-        </a>
+    <footer class="footer">
+      <div class="footer-content">
+        <h3 class="footer-title">Let's Connect</h3>
+        <p class="footer-tagline">Open to opportunities in Software, Backend & DevOps</p>
+        <div class="footer-links">
+          <a
+            href="https://www.linkedin.com/in/keroliskhalaf"
+            target="_blank"
+            rel="noopener"
+            class="footer-link"
+            aria-label="LinkedIn"
+          >
+            <i class="devicon-linkedin-plain"></i>
+            LinkedIn
+          </a>
+          <a
+            href="https://github.com/KerolisKhalaf"
+            target="_blank"
+            rel="noopener"
+            class="footer-link"
+            aria-label="GitHub"
+          >
+            <i class="devicon-github-original"></i>
+            GitHub
+          </a>
+          <a
+            href="mailto:contact&#64;keroliskhalaf.dev"
+            class="footer-link"
+            aria-label="Email"
+          >
+            <svg class="email-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            Email
+          </a>
+        </div>
+        <p class="copyright">© {{ year }} Kerolis Khalaf Shafik. Built with Angular.</p>
       </div>
-      <p class="copyright">© {{ year }} Kerolis Khalaf. Built with Angular.</p>
     </footer>
   `,
   styles: [`
-    .footer-cta {
+    .footer {
       margin-top: 5rem;
       padding: 3rem 0 2rem;
       border-top: 1px solid var(--border-color);
+    }
+
+    .footer-content {
       text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
     }
-    .footer-cta h3 {
+
+    .footer-title {
       color: var(--text-primary);
-      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+      font-weight: 600;
     }
-    .footer-cta > p {
+
+    .footer-tagline {
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      margin: 0 0 2rem;
     }
-    .cta-links {
+
+    .footer-links {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
       flex-wrap: wrap;
+      gap: 1rem;
       margin-bottom: 2rem;
     }
-    .cta-btn {
+
+    .footer-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      background: var(--bg-secondary);
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       color: var(--link);
       text-decoration: none;
-      font-weight: 600;
-      transition: all 0.2s;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all var(--transition-fast);
     }
-    .cta-btn:hover {
-      background: var(--accent);
+
+    .footer-link:hover {
       border-color: var(--accent);
-      color: white;
-      transform: translateY(-2px);
+      color: var(--accent);
+      box-shadow: 0 0 12px var(--neon-glow);
     }
-    .cta-btn i, .cta-btn .credly-icon {
+
+    .footer-link i,
+    .email-icon {
       font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
     }
-    .credly-icon { font-family: serif; }
+
     .copyright {
       color: var(--text-muted);
       font-size: 0.85rem;
+      margin: 0;
     }
   `],
 })

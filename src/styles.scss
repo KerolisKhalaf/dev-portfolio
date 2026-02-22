@@ -1,29 +1,127 @@
+/* ============================================
+   PORTFOLIO GLOBAL STYLES
+   Dark Navy + Neon Green Terminal Theme
+   ============================================ */
+
 :root {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
+  --bg-primary: #0a0e14;
+  --bg-secondary: #0d1117;
+  --bg-tertiary: #161b22;
+  --bg-card: #161b22;
   --border-color: #30363d;
   --accent: #238636;
   --accent-hover: #2ea043;
+  --neon-green: #39ff14;
+  --neon-green-soft: rgba(57, 255, 20, 0.25);
+  --neon-grid: rgba(57, 255, 20, 0.08);
+  --neon-glow: rgba(57, 255, 20, 0.3);
   --link: #58a6ff;
   --text-primary: #c9d1d9;
   --text-muted: #8b949e;
+  --container-max: 1100px;
+  --section-spacing: 5rem;
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s ease;
 }
 
-* { box-sizing: border-box; }
+/* Reset & Base */
+* {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
+/* ============================================
+   SHARED BUTTON (View Projects / CV)
+   ============================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  background: var(--accent);
+  color: white;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+}
+
+/* ============================================
+   ANIMATED NEON GRID BACKGROUND
+   CSS-only, subtle, performance-friendly
+   ============================================ */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--bg-primary);
+  background-image:
+    linear-gradient(var(--neon-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--neon-grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-pulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Slight glow overlay - very subtle */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(57, 255, 20, 0.03) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* Disable heavy animation on mobile for performance */
+@media (max-width: 768px) {
+  body::before {
+    animation: none;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -31,40 +129,85 @@ body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes typing-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes verified-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
 .fade-in {
   animation: fade-in 0.5s ease-out forwards;
+}
+
+.hover-up {
+  transition: transform var(--transition-fast);
 }
 
 .hover-up:hover {
   transform: translateY(-4px);
 }
 
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Section spacing */
+section {
+  padding-top: var(--section-spacing);
+  scroll-margin-top: 80px;
+}
+
 .section-title {
   font-family: 'Fira Code', monospace;
   color: var(--accent);
-  font-size: 1.5rem;
-  margin-top: 80px;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  margin: 0 0 1.5rem;
+  font-weight: 500;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* ============================================
+   UTILITY
+   ============================================ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-@media (max-width: 768px) {
-  .hero-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 2rem;
-  }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-  .profile-img {
-    width: 200px;
-    height: 200px;
-  }
+/* ============================================
+   RESPONSIVE SAFETY
+   ============================================ */
 
-  .terminal-text {
-    font-size: 1.8rem;
-  }
+main {
+  max-width: 100%;
+  overflow-x: hidden;
 }
