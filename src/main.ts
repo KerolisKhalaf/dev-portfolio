@@ -2,6 +2,8 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app'; // اتأكد من الاسم هنا
 import { inject } from '@vercel/analytics';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+injectSpeedInsights();
 inject();
 
 bootstrapApplication(AppComponent, appConfig)
