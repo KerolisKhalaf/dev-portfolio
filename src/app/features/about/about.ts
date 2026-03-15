@@ -10,14 +10,19 @@ import { Component } from '@angular/core';
         <div class="about-grid">
           <div class="about-main">
             <p class="bio">
-              <strong>Kerolis Khalaf Shafik</strong> — Full Stack Developer specializing in the MEAN stack,
-              with a strong backend focus and growing DevOps skills. Currently pursuing a
-              <strong>BSc in Information Technology</strong> (2022–2026) at Egyptian E-Learning University (EELU).
-            </p>
+              Hi, I’m Kerolis — a Full Stack Developer who enjoys turning ideas into real, working products.
+
+I specialize in building modern web applications using technologies like Angular, Node.js, and MongoDB. My focus is not just writing code, but creating fast, scalable, and user-friendly systems that actually solve real problems.
+
+Over the past few years, I’ve worked on several projects including e-commerce platforms, AI-integrated applications, and full-stack systems where I handled both the front-end experience and backend logic.
+</p>
             <p class="bio">
-              Based in <strong>Cairo, Egypt</strong>. Background in IT Support, data labeling,
-              and full-stack development. Actively learning Docker, CI/CD, and infrastructure automation.
-            </p>
+              
+What excites me most about development is the process of building something from scratch and watching it grow into a real product people can use.
+
+Currently, I'm expanding my expertise in backend architecture and scalable systems while continuing to build projects that combine web development with AI.
+
+If you have an idea you’d like to turn into a real product, let’s build it together. </p>
           </div>
           <div class="about-metrics">
             <div class="metric">
