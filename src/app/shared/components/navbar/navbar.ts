@@ -6,7 +6,7 @@ import { Component, signal } from '@angular/core';
   template: `
     <nav class="nav-container">
       <a href="#" class="logo">
-        <span class="bracket">{{ '{' }}</span> dev.portfolio <span class="bracket">{{ '}' }}</span>
+        <span class="bracket">{{ '{' }}</span> kerolis.khalaf.portfolio <span class="bracket">{{ '}' }}</span>
       </a>
       <button
         class="nav-toggle"
@@ -166,6 +166,8 @@ import { Component, signal } from '@angular/core';
       cursor: pointer;
       width: 100%;
     }
+
+
 
     .cv-button:hover {
       background: var(--accent-hover);
