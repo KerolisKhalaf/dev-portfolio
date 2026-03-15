@@ -40,12 +40,16 @@ import { FooterComponent } from './shared/components/footer/footer';
     .main-content {
       max-width: var(--container-max);
       margin: 0 auto;
+      margin-top: 70px;
       padding: 0 1.25rem;
       width: 100%;
       overflow-x: hidden;
     }
     @media (min-width: 768px) {
-      .main-content { padding: 0 1.5rem; }
+      .main-content { 
+        padding: 0 1.5rem;
+        margin-top: 70px;
+      }
     }
     @media (min-width: 1024px) {
       .main-content { padding: 0 2rem; }

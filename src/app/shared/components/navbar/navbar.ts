@@ -28,7 +28,7 @@ import { Component, signal } from '@angular/core';
         <a href="https://github.com/KerolisKhalaf" target="_blank" rel="noopener" class="github-link" aria-label="GitHub">
           <i class="devicon-github-original"></i>
         </a>
-        <a href="cv.pdf" target="_blank" download class="btn-primary cv-button" (click)="closeMenu()">
+        <a href="cv.pdf" target="_blank" download class="cv-button" (click)="closeMenu()">
           <svg class="cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
@@ -47,9 +47,12 @@ import { Component, signal } from '@angular/core';
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--border-color);
       background: rgba(10, 14, 20, 0.95);
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      width: 100%;
       max-width: 100vw;
       overflow-x: hidden;
     }
@@ -103,8 +106,8 @@ import { Component, signal } from '@angular/core';
 
     .links {
       display: none;
-      position: absolute;
-      top: 100%;
+      position: fixed;
+      top: 70px;
       left: 0;
       right: 0;
       background: var(--bg-secondary);
@@ -112,6 +115,11 @@ import { Component, signal } from '@angular/core';
       flex-direction: column;
       padding: 1rem;
       gap: 0.5rem;
+      z-index: 999;
+      width: 100%;
+      max-width: 100vw;
+      overflow-y: auto;
+      max-height: calc(100vh - 70px);
     }
 
     .links.open {
@@ -127,16 +135,42 @@ import { Component, signal } from '@angular/core';
     }
 
     .links a:hover {
-      color: var(--link);
+      color: var(--accent);
       background: rgba(255, 255, 255, 0.03);
     }
 
     .github-link {
       font-size: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: inherit;
+      transition: color var(--transition-fast);
     }
 
     .cv-button {
       margin-top: 0.5rem;
+      background: var(--accent);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: none;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .cv-button:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
     }
 
     .cv-icon {
@@ -158,21 +192,58 @@ import { Component, signal } from '@angular/core';
         border: none;
         padding: 0;
         background: transparent;
+        margin-top: 0;
+        top: auto;
+        left: auto;
+        right: auto;
+        width: auto;
+        max-width: none;
+        z-index: auto;
       }
 
       .links a {
         padding: 0;
         margin-left: 1.5rem;
+        color: var(--text-primary);
         border-radius: 0;
+        font-size: 0.95rem;
       }
 
       .links a:hover {
+        color: var(--accent);
         background: transparent;
       }
 
+      .github-link {
+        margin-left: 1.5rem;
+        color: var(--text-primary);
+        font-size: 1.3rem;
+      }
+
       .cv-button {
-        margin-top: 0;
-        margin-left: 1rem;
+        margin: 0;
+        margin-left: 1.5rem;
+        width: auto;
+        background: var(--accent);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        text-decoration: none;
+      }
+
+      .cv-button:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
       }
     }
   `],
