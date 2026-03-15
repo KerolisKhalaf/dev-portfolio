@@ -21,7 +21,7 @@ Over the past few years, I’ve worked on several projects including e-commerce 
 
 I’m currently focused on DevOps solutions, improving backend architecture, and creating scalable systems, while continuously expanding my skills in web development and AI integration.
 
-Have an idea you want to bring to life? Let’s build it together.
+Have an idea you want to bring to life? <br> <strong>Let’s build it together.</strong>
  </p>
           </div>
           <div class="about-metrics">
