@@ -17,12 +17,12 @@ I specialize in building modern web applications using technologies like Angular
 Over the past few years, I’ve worked on several projects including e-commerce platforms, AI-integrated applications, and full-stack systems where I handled both the front-end experience and backend logic.
 </p>
             <p class="bio">
-              
-What excites me most about development is the process of building something from scratch and watching it grow into a real product people can use.
+              What excites me most about development is building projects from scratch and turning ideas into real, usable products.
 
-Currently, I'm expanding my expertise in backend architecture and scalable systems while continuing to build projects that combine web development with AI.
+I’m currently focused on DevOps solutions, improving backend architecture, and creating scalable systems, while continuously expanding my skills in web development and AI integration.
 
-If you have an idea you’d like to turn into a real product, let’s build it together. </p>
+Have an idea you want to bring to life? Let’s build it together.
+ </p>
           </div>
           <div class="about-metrics">
             <div class="metric">
