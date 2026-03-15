@@ -46,33 +46,78 @@ const BADGE_PLACEHOLDER =
               <span class="in-progress-tag">In Progress</span>
             }
             <div class="badge-image-wrapper">
-              <img
-                [src]="cert.imageUrl || badgePlaceholder"
-                [alt]="cert.title"
-                loading="lazy"
-                class="badge-image"
-                (error)="onBadgeImageError($event)"
-              >
+              @if (cert.localImage) {
+                <img
+                  [src]="'/' + cert.localImage"
+                  [alt]="cert.title"
+                  loading="lazy"
+                  class="badge-image"
+                  (error)="onBadgeImageError($event)"
+                >
+              } @else if (cert.imageUrl) {
+                <img
+                  [src]="cert.imageUrl"
+                  [alt]="cert.title"
+                  loading="lazy"
+                  class="badge-image"
+                  (error)="onBadgeImageError($event)"
+                >
+              } @else {
+                <img
+                  [src]="badgePlaceholder"
+                  [alt]="cert.title"
+                  loading="lazy"
+                  class="badge-image"
+                >
+              }
             </div>
             <div class="badge-content">
               <h3 class="badge-title">{{ cert.title }}</h3>
               <span class="badge-issuer">{{ cert.issuer }}</span>
               <span class="badge-date">{{ cert.issueDate }}</span>
-              @if (cert.verified) {
-                <a
-                  [href]="cert.credentialUrl"
-                  target="_blank"
-                  rel="noopener"
-                  class="view-credential-btn"
-                >
-                  View Credential →
-                </a>
-              }
+              <div class="badge-actions">
+                @if (cert.verified) {
+                  <a
+                    [href]="cert.credentialUrl"
+                    target="_blank"
+                    rel="noopener"
+                    class="view-credential-btn"
+                    title="View credential on Credly"
+                  >
+                    Credential →
+                  </a>
+                }
+              </div>
             </div>
           </article>
         }
       </div>
     </section>
+
+    <!-- Image Viewer Modal -->
+    @if (showImageModal()) {
+      <div class="modal-overlay" (click)="closeImageModal()">
+        <div class="modal-content modal-image" (click)="$event.stopPropagation()">
+          <button
+            type="button"
+            class="modal-close-btn"
+            (click)="closeImageModal()"
+            aria-label="Close modal"
+          >
+            ✕
+          </button>
+          <div class="modal-body">
+            @if (selectedImage(); as image) {
+              <img
+                [src]="image.url"
+                [alt]="image.title"
+                class="full-size-image"
+              >
+            }
+          </div>
+        </div>
+      </div>
+    }
   `,
   styles: [`
     .certs-section {
@@ -124,7 +169,7 @@ const BADGE_PLACEHOLDER =
       border: 1px solid var(--border-color);
       border-radius: 8px;
       overflow: hidden;
-      min-height: 320px;
+      min-height: 380px;
       transition: all var(--transition-smooth);
     }
 
@@ -184,18 +229,19 @@ const BADGE_PLACEHOLDER =
 
     .badge-image-wrapper {
       flex-shrink: 0;
-      height: 140px;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 0;
       background: rgba(0, 0, 0, 0.2);
+      overflow: hidden;
     }
 
     .badge-image {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .badge-content {
@@ -225,22 +271,131 @@ const BADGE_PLACEHOLDER =
       flex: 1;
     }
 
+    .badge-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
     .view-credential-btn {
       display: inline-block;
-      margin-top: 0.5rem;
       font-size: 0.9rem;
       font-weight: 500;
       color: var(--accent);
       transition: color var(--transition-fast);
+      text-decoration: none;
     }
 
     .view-credential-btn:hover {
       color: var(--neon-green);
     }
 
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-content {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      max-width: 90vw;
+      max-height: 90vh;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.3s ease-out;
+    }
+
+    .modal-image {
+      max-width: 85vw;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-body {
+      flex: 1;
+      overflow: auto;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+    }
+
+    .full-size-image {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     @media (min-width: 768px) {
       .badges-grid {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+
+      .modal-content {
+        max-width: 800px;
+      }
+
+      .modal-image {
+        max-width: 700px;
       }
     }
   `],
@@ -263,6 +418,10 @@ export class CertificationsComponent {
     return certs.filter((c) => c.category === filter);
   });
 
+  // Image Modal State
+  showImageModal = signal(false);
+  selectedImage = signal<{ url: string; title: string } | null>(null);
+
   setFilter(cat: CertificationCategory): void {
     this.activeFilter.set(cat);
   }
@@ -271,4 +430,191 @@ export class CertificationsComponent {
     const img = e.target as HTMLImageElement;
     if (img) img.src = this.badgePlaceholder;
   }
+
+  openImageModal(imagePath: string, title: string): void {
+    this.selectedImage.set({
+      url: `/${imagePath}`,
+      title,
+    });
+    this.showImageModal.set(true);
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeImageModal(): void {
+    this.showImageModal.set(false);
+    this.selectedImage.set(null);
+    document.body.style.overflow = 'auto';
+  }
 }
+//   styles: [`
+//     .certs-section {
+//       padding-top: var(--section-spacing);
+//     }
+
+//     .filter-bar {
+//       display: flex;
+//       flex-wrap: wrap;
+//       gap: 0.5rem;
+//       margin-bottom: 1.5rem;
+//     }
+
+//     .filter-btn {
+//       padding: 0.5rem 1rem;
+//       font-size: 0.875rem;
+//       font-weight: 500;
+//       font-family: inherit;
+//       color: var(--text-muted);
+//       background: var(--bg-card);
+//       border: 1px solid var(--border-color);
+//       border-radius: 6px;
+//       cursor: pointer;
+//       transition: all var(--transition-fast);
+//     }
+
+//     .filter-btn:hover {
+//       color: var(--link);
+//       border-color: var(--border-color);
+//     }
+
+//     .filter-btn.active {
+//       color: var(--accent);
+//       border-color: var(--accent);
+//       box-shadow: 0 0 12px var(--neon-glow);
+//     }
+
+//     .badges-grid {
+//       display: grid;
+//       grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+//       gap: 1.5rem;
+//     }
+
+//     .badge-card {
+//       position: relative;
+//       display: flex;
+//       flex-direction: column;
+//       background: var(--bg-card);
+//       border: 1px solid var(--border-color);
+//       border-radius: 8px;
+//       overflow: hidden;
+//       min-height: 320px;
+//       transition: all var(--transition-smooth);
+//     }
+
+//     .badge-card:hover {
+//       border-color: rgba(57, 255, 20, 0.3);
+//       box-shadow: 0 0 20px var(--neon-glow);
+//       transform: scale(1.02);
+//     }
+
+//     .badge-card.verified .verified-badge {
+//       animation: verified-pulse 4s ease-in-out infinite;
+//     }
+
+//     .category-tag {
+//       position: absolute;
+//       top: 0.75rem;
+//       right: 0.75rem;
+//       font-size: 0.7rem;
+//       font-weight: 600;
+//       color: var(--accent);
+//       background: rgba(35, 134, 54, 0.15);
+//       padding: 0.25rem 0.5rem;
+//       border-radius: 4px;
+//       z-index: 1;
+//     }
+
+//     .verified-badge {
+//       position: absolute;
+//       top: 0.75rem;
+//       left: 0.75rem;
+//       display: inline-flex;
+//       align-items: center;
+//       gap: 0.35rem;
+//       font-size: 0.75rem;
+//       font-weight: 600;
+//       color: var(--accent);
+//       z-index: 1;
+//     }
+
+//     .verified-badge svg {
+//       width: 14px;
+//       height: 14px;
+//     }
+
+//     .in-progress-tag {
+//       position: absolute;
+//       top: 0.75rem;
+//       left: 0.75rem;
+//       font-size: 0.75rem;
+//       font-weight: 500;
+//       color: var(--text-muted);
+//       background: rgba(139, 148, 158, 0.2);
+//       padding: 0.25rem 0.5rem;
+//       border-radius: 4px;
+//       z-index: 1;
+//     }
+
+//     .badge-image-wrapper {
+//       flex-shrink: 0;
+//       height: 140px;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       padding: 1.5rem;
+//       background: rgba(0, 0, 0, 0.2);
+//     }
+
+//     .badge-image {
+//       width: 100px;
+//       height: 100px;
+//       object-fit: contain;
+//     }
+
+//     .badge-content {
+//       flex: 1;
+//       display: flex;
+//       flex-direction: column;
+//       padding: 1.25rem;
+//       gap: 0.4rem;
+//     }
+
+//     .badge-title {
+//       color: var(--text-primary);
+//       font-size: 0.95rem;
+//       font-weight: 600;
+//       margin: 0;
+//       line-height: 1.4;
+//     }
+
+//     .badge-issuer {
+//       color: var(--text-muted);
+//       font-size: 0.85rem;
+//     }
+
+//     .badge-date {
+//       color: var(--text-muted);
+//       font-size: 0.8rem;
+//       flex: 1;
+//     }
+
+//     .view-credential-btn {
+//       display: inline-block;
+//       margin-top: 0.5rem;
+//       font-size: 0.9rem;
+//       font-weight: 500;
+//       color: var(--accent);
+//       transition: color var(--transition-fast);
+//     }
+
+//     .view-credential-btn:hover {
+//       color: var(--neon-green);
+//     }
+
+//     @media (min-width: 768px) {
+//       .badges-grid {
+//         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+//       }
+//     }
+//   `],
+// })
+

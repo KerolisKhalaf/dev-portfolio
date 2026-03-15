@@ -13,6 +13,7 @@ export interface Certification {
   verified: boolean;
   imageUrl: string;
   credentialUrl: string;
+  localImage?: string; // Local image file path in /public
 }
 
 export type CertificationCategory =
@@ -34,6 +35,7 @@ export const CERTIFICATIONS: Certification[] = [
     verified: true,
     imageUrl: 'https://images.credly.com/size/200x200/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png',
     credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    localImage: 'CCNA-_Introduction_to_Networks.png',
   },
   {
     id: 'ccna-srwe',
@@ -44,6 +46,7 @@ export const CERTIFICATIONS: Certification[] = [
     verified: true,
     imageUrl: 'https://images.credly.com/size/200x200/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png',
     credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    localImage: 'CCNA-_Switching-_Routing-_and_Wireless_Essentials.png',
   },
   {
     id: 'ms-sc900',
@@ -54,6 +57,7 @@ export const CERTIFICATIONS: Certification[] = [
     verified: true,
     imageUrl: 'https://images.credly.com/size/200x200/images/be8fcaeb-c769-4858-b567-4cd3097ec21d/SC-900_Microsoft_Security_Compliance_and_Identity_Fundamentals.png',
     credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    localImage: 'Microsoft Certified Security, Compliance, and Identity Fundamentals.png',
   },
   {
     id: 'sas-data-essentials',
@@ -74,16 +78,19 @@ export const CERTIFICATIONS: Certification[] = [
     verified: true,
     imageUrl: 'https://images.credly.com/size/200x200/images/290ecea0-3a09-47c5-b1a3-999798260d16/sas-data-literacy-practice.png',
     credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    localImage: 'Data Literacy in Practice.png',
   },
+
   {
-    id: 'html-css-js',
-    title: 'HTML, CSS & JavaScript Certification',
-    issuer: 'Professional Training Program',
+    id: 'nti-mean-fullstack',
+    title: 'NTI MEAN Stack Full Stack',
+    issuer: 'National Telecommunication Institute',
     category: 'Development',
-    issueDate: '2023',
+    issueDate: '2025',
     verified: true,
     imageUrl: '',
     credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    localImage: 'NTI.png',
   },
   {
     id: 'depi-devops',
@@ -94,16 +101,18 @@ export const CERTIFICATIONS: Certification[] = [
     verified: true,
     imageUrl: 'https://images.credly.com/size/200x200/images/4136ced8-75d5-4afb-8677-40b6236e2672/8-2017-od-badges-2-1200px.png',
     credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    localImage: 'Digital Egypt Pioneers Initiative (DEPI) – DevOps Track.png',
   },
   {
     id: 'az900',
-    title: 'Microsoft Azure Fundamentals (AZ-900)',
+    title: 'The Modern Era of Cybersecurity in the Age of AI with Hash',
     issuer: 'Microsoft',
     category: 'Cloud',
-    issueDate: 'In Progress',
-    verified: false,
+    issueDate: '2025',
+    verified: true,
     imageUrl: 'https://images.credly.com/size/200x200/images/be8fcaeb-c769-4858-b567-4cd3097ec21d/azure-fundamentals-600x600.png',
     credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    localImage: 'Microsoft Certified.png',
   },
   {
     id: 'docker-foundations',
