@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   template: `
     <footer class="footer">
       <div class="footer-content">
-        <h3 class="footer-title">Let's Connect</h3>
+        <h3 class="footer-title">Let's Build Something Great Together</h3>
         <p class="footer-tagline">Open to opportunities in Software, Backend & DevOps</p>
         <div class="footer-links">
           <a
