@@ -204,10 +204,10 @@ import { Component, signal } from '@angular/core';
       }
 
       .links a {
-        padding: 0;
+        padding: 0.5rem;
         margin-left: 1.5rem;
         color: var(--text-primary);
-        border-radius: 0;
+        border-radius: 4px;
         font-size: 0.95rem;
       }
 
