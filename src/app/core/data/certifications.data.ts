@@ -99,8 +99,8 @@ export const CERTIFICATIONS: Certification[] = [
     category: 'DevOps',
     issueDate: '2025',
     verified: true,
-    imageUrl: 'https://images.credly.com/size/200x200/images/4136ced8-75d5-4afb-8677-40b6236e2672/8-2017-od-badges-2-1200px.png',
-    credentialUrl: 'https://www.credly.com/users/kiroles-khalaf/badges',
+    imageUrl: 'https://drive.google.com/file/d/1QwRcRuy3Fyyb3DLVHpGJZX0rBgu75bux/view?usp=sharing',
+    credentialUrl: 'https://drive.google.com/file/d/1QwRcRuy3Fyyb3DLVHpGJZX0rBgu75bux/view?usp=sharing',
     localImage: 'Digital Egypt Pioneers Initiative (DEPI) – DevOps Track.png',
   },
   {
