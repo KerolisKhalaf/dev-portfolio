@@ -137,7 +137,9 @@ const BADGE_PLACEHOLDER =
       font-weight: 500;
       font-family: inherit;
       color: var(--text-muted);
-      background: var(--bg-card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-color);
       border-radius: 6px;
       cursor: pointer;
@@ -165,7 +167,9 @@ const BADGE_PLACEHOLDER =
       position: relative;
       display: flex;
       flex-direction: column;
-      background: var(--bg-card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       overflow: hidden;
@@ -176,7 +180,7 @@ const BADGE_PLACEHOLDER =
     .badge-card:hover {
       border-color: rgba(57, 255, 20, 0.3);
       box-shadow: 0 0 20px var(--neon-glow);
-      transform: scale(1.02);
+      transform: translateY(-4px);
     }
 
     .badge-card.verified .verified-badge {
@@ -617,4 +621,3 @@ export class CertificationsComponent {
 //     }
 //   `],
 // })
-

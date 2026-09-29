@@ -6,6 +6,7 @@ interface ExperienceItem {
   period: string;
   description: string;
   highlight?: boolean;
+  tags?: string[];
 }
 
 @Component({
@@ -19,9 +20,17 @@ interface ExperienceItem {
           <div class="timeline-item" [class.highlight]="item.highlight">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-              <h3 class="exp-title">{{ item.title }} {{ item.company }}</h3>
+              <h3 class="exp-title">{{ item.company }}</h3>
+              <p class="exp-role">{{ item.title }}</p>
               <span class="exp-period">{{ item.period }}</span>
               <p class="exp-description">{{ item.description }}</p>
+              @if (item.tags?.length) {
+                <div class="exp-tags">
+                  @for (tag of item.tags; track tag) {
+                    <span class="exp-tag">{{ tag }}</span>
+                  }
+                </div>
+              }
             </div>
           </div>
         }
@@ -67,7 +76,9 @@ interface ExperienceItem {
     }
 
     .timeline-content {
-      background: var(--bg-card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 1.25rem 1.5rem;
@@ -77,7 +88,7 @@ interface ExperienceItem {
 
     .timeline-content:hover {
       border-color: rgba(57, 255, 20, 0.2);
-      transform: translateX(4px);
+      transform: translateY(-3px);
     }
 
     .timeline-item.highlight .timeline-content {
@@ -89,6 +100,13 @@ interface ExperienceItem {
       font-size: 1rem;
       font-weight: 600;
       margin: 0 0 0.25rem;
+    }
+
+    .exp-role {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0 0 0.15rem;
     }
 
     .exp-period {
@@ -103,6 +121,23 @@ interface ExperienceItem {
       color: var(--text-muted);
       font-size: 0.95rem;
       line-height: 1.6;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.9rem;
+    }
+
+    .exp-tag {
+      color: var(--accent);
+      background: rgba(35, 134, 54, 0.14);
+      border: 1px solid rgba(57, 255, 20, 0.16);
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
     }
 
     @media (min-width: 768px) {
@@ -123,6 +158,14 @@ interface ExperienceItem {
 })
 export class ExperienceComponent {
   experiences: ExperienceItem[] = [
+    {
+      title: 'Programming Instructor',
+      company: 'iSchool',
+      period: 'Jun 2026 – Sep 2026',
+      description:
+        'Programming Instructor delivering K-12 programming education through structured lessons, practical labs, debugging sessions, and student projects.',
+      tags: ['Python', 'Data Analysis', 'Godot', 'Web Development', 'Flutter', 'FlutterFlow'],
+    },
     {
       title: 'Data Labeling Specialist',
       company: '@ AT-Micro Engineering',

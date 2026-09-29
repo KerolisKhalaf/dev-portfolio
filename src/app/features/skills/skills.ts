@@ -47,7 +47,9 @@ interface SkillCategory {
     }
 
     .skill-category {
-      background: var(--bg-card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 1.5rem;
@@ -86,7 +88,7 @@ interface SkillCategory {
     }
 
     .skill-item:hover {
-      transform: scale(1.05);
+      transform: translateY(-3px);
       box-shadow: 0 0 15px var(--neon-glow);
     }
 

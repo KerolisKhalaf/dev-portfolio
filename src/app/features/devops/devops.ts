@@ -43,7 +43,9 @@ import { Component } from '@angular/core';
     }
 
     .devops-card {
-      background: var(--bg-card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 2rem;

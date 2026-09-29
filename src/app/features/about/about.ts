@@ -48,7 +48,9 @@ Have an idea you want to bring to life? <br> <strong>Let’s build it together.<
     }
 
     .about-card {
-      background: var(--bg-card);
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 2rem;

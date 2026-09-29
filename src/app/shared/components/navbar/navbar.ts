@@ -46,7 +46,13 @@ import { Component, signal } from '@angular/core';
       align-items: center;
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--border-color);
-      background: rgba(10, 14, 20, 0.95);
+      background:
+        linear-gradient(110deg, rgba(57, 255, 20, 0.035), transparent 35%, rgba(88, 166, 255, 0.04)),
+        rgba(8, 18, 28, 0.58);
+      backdrop-filter: blur(22px) saturate(165%);
+      -webkit-backdrop-filter: blur(22px) saturate(165%);
+      border-bottom-color: rgba(120, 220, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.32), 0 1px 24px rgba(34, 211, 238, 0.08);
       position: fixed;
       top: 0;
       left: 0;
@@ -61,7 +67,7 @@ import { Component, signal } from '@angular/core';
       font-family: 'Fira Code', monospace;
       font-weight: 600;
       font-size: 1.1rem;
-      color: var(--text-primary);
+      color: #f1f5f9;
       text-decoration: none;
     }
 
@@ -214,6 +220,7 @@ import { Component, signal } from '@angular/core';
       .links a:hover {
         color: var(--accent);
         background: transparent;
+        box-shadow: inset 0 -2px 0 var(--accent);
       }
 
       .github-link {
