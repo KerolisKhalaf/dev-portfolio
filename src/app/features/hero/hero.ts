@@ -54,8 +54,9 @@ import { Component } from '@angular/core';
     .hero-text {
       flex: 1;
       min-width: 0;
-      padding: clamp(1.25rem, 3vw, 2rem);
-      border-radius: 16px;
+      padding: clamp(1.5rem, 3.5vw, 2.5rem);
+      border-radius: 26px;
+      max-width: 760px;
     }
 
     .terminal-text {
@@ -167,13 +168,16 @@ import { Component } from '@angular/core';
     }
 
     .profile-wrapper {
-      width: min(360px, 45vw);
+      width: min(420px, 36vw);
       aspect-ratio: 1;
       max-width: 420px;
       border-radius: 50%;
       padding: 5px;
       background: linear-gradient(135deg, var(--neon-green-soft), var(--accent));
-      box-shadow: 0 0 20px var(--neon-glow);
+      box-shadow:
+        0 0 25px rgba(34, 197, 94, 0.48),
+        0 0 60px rgba(34, 197, 94, 0.2),
+        0 0 90px rgba(34, 211, 238, 0.1);
       transition: transform var(--transition-fast), box-shadow var(--transition-smooth);
       animation: profile-float 6s ease-in-out 1.2s infinite;
       position: relative;
@@ -198,7 +202,7 @@ import { Component } from '@angular/core';
 
     @media (max-width: 1024px) {
       .profile-wrapper {
-        width: min(300px, 40vw);
+        width: min(340px, 38vw);
         max-width: 320px;
       }
     }

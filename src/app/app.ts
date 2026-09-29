@@ -170,8 +170,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     const height = window.innerHeight;
     const spacing = 70;
     const padding = spacing * 3;
-    const range = 360;
-    const strength = 62;
+    const range = 520;
+    const strength = 150;
     const context = this.context;
 
     context.clearRect(0, 0, width, height);
@@ -206,7 +206,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     for (let y = -padding; y <= height + padding; y += spacing) {
       context.beginPath();
-      for (let x = -padding; x <= width + padding; x += 10) {
+      for (let x = -padding; x <= width + padding; x += 6) {
         const [warpedX, warpedY] = warp(x, y);
         if (x === -padding) context.moveTo(warpedX, warpedY);
         else context.lineTo(warpedX, warpedY);
@@ -216,7 +216,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     for (let x = -padding; x <= width + padding; x += spacing) {
       context.beginPath();
-      for (let y = -padding; y <= height + padding; y += 10) {
+      for (let y = -padding; y <= height + padding; y += 6) {
         const [warpedX, warpedY] = warp(x, y);
         if (y === -padding) context.moveTo(warpedX, warpedY);
         else context.lineTo(warpedX, warpedY);

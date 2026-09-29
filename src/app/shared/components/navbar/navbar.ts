@@ -44,22 +44,23 @@ import { Component, signal } from '@angular/core';
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.25rem;
+      border: 1px solid rgba(34, 211, 238, 0.28);
+      border-radius: 20px;
       background:
         linear-gradient(110deg, rgba(57, 255, 20, 0.035), transparent 35%, rgba(88, 166, 255, 0.04)),
         rgba(8, 18, 28, 0.58);
       backdrop-filter: blur(22px) saturate(165%);
       -webkit-backdrop-filter: blur(22px) saturate(165%);
-      border-bottom-color: rgba(120, 220, 255, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.32), 0 1px 24px rgba(34, 211, 238, 0.08);
+      border-bottom-color: rgba(120, 220, 255, 0.28);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.32), 0 0 26px rgba(34, 211, 238, 0.1), 0 0 20px rgba(34, 197, 94, 0.08);
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 10px;
+      left: 2.5%;
+      right: 2.5%;
       z-index: 1000;
-      width: 100%;
-      max-width: 100vw;
+      width: 95%;
+      max-width: none;
       overflow-x: hidden;
     }
 
@@ -69,6 +70,16 @@ import { Component, signal } from '@angular/core';
       font-size: 1.1rem;
       color: #f1f5f9;
       text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        left: 0;
+        right: 0;
+        width: 100%;
+        top: 0;
+        border-radius: 0;
+      }
     }
 
     .bracket {
