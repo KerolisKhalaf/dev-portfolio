@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
         <p class="footer-tagline">Open to opportunities in Software, Backend & DevOps</p>
         <div class="footer-links">
           <a
-            href="https://www.linkedin.com/in/keroliskhalaf"
+            href="https://www.linkedin.com/in/kerolis-khalaf-681b95284"
             target="_blank"
             rel="noopener"
             class="footer-link"
